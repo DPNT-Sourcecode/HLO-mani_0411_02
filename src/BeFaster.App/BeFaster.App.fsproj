@@ -90,7 +90,7 @@
       <HintPath>..\..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="TDL.Client">
-      <HintPath>..\..\packages\TDL.Client.0.25.1\lib\net45\TDL.Client.dll</HintPath>
+      <HintPath>..\..\packages\TDL.Client.0.23.0\lib\net45\TDL.Client.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

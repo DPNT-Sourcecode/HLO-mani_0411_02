@@ -17,8 +17,6 @@ open System
 ///
 ///   From command line:
 ///      msbuild befaster.sln; src\BeFaster.App\bin\Debug\BeFaster.App.exe
-///       or
-///      msbuild befaster.sln; mono src/BeFaster.App/bin/Debug/BeFaster.App.exe
 ///
 ///   To run your unit tests locally:
 ///      Run the "BeFaster.App.Tests - Unit Tests" configuration.
