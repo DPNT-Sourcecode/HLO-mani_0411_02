@@ -3,4 +3,4 @@
 open System
 
 module Hello =
-    let hello(friendName: string) = raise (NotImplementedException())
+    let hello(friendName: string) = "Hello, World!"
