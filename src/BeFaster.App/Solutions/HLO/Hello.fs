@@ -3,4 +3,4 @@
 open System
 
 module Hello =
-    let hello(friendName: string) = "Hello, World!"
+    let hello(friendName: string) = if friendName = "" then "Hello, " + friendName + "!" else "Hello, World!"
