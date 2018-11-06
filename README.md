@@ -14,7 +14,6 @@ IDE
 
 ## 2. How to start
 
-- Run `nuget restore befaster.sln`
 - Open solution `befaster.sln`
 - In solution open `BeFaster.App/SendCommandToServer.fs`
 - Read the comments as documentation, they will guide through the rest of the setup
