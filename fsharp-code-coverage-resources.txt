@@ -1,0 +1,54 @@
+Issue raised on FSharp git repo
+	https://github.com/fsharp/fsharp/issues/863
+
+https://github.com/Microsoft/visualfsharp/issues/3579
+https://github.com/SteveGilham/altcover
+
+https://github.com/codecov
+	https://github.com/codecov/example-fsharp
+
+https://www.reddit.com/r/fsharp/comments/5gyuh4/using_xunit/
+https://www.reddit.com/r/dotnet/comments/7b86pl/net_code_coverage_tools_for_linuxubuntu/
+	https://www.reddit.com/user/xadoc_
+
+
+mono packages/altcover.3.5.569/tools/net45/AltCover.exe --inputDirectory src/BeFaster.App.Tests/bin/Debug --xmlReport coverage/coverage.xml --opencover --assemblyExcludeFilter=.+\.Tests --assemblyExcludeFilter=AltCover.+ --assemblyExcludeFilter=Mono\.DllMap.+ --inplace --save
+
+xmllint --xpath '//package[@name="befaster/solutions/'${CHALLENGE_ID}'"]/counter[@type="INSTRUCTION"]' ${JACOCO_TEST_REPORT_XML_FILE}
+
+xmllint --xpath '//FullName="BeFaster.App.Solutions.SUM.Sum"' coverage/coverage.xml
+
+grep -i '<FullName>BeFaster.App.Solutions.SUM.Sum</FullName>' coverage/coverage.xml -A 2 | grep "Method visited" | sed -e 's/.*sequenceCoverage=\(\S*\).*/\1/g' | tr '"' ''
+
+mono packages/altcover.3.5.569/tools/net45/AltCover.exe  \
+  --inputDirectory src/BeFaster.App.Tests/bin/Debug \
+  --assemblyFilter=Adapter \
+  --assemblyFilter=Mono \
+  --assemblyFilter=\.Recorder \
+  --assemblyFilter=Sample \
+  --assemblyFilter=nunit \
+  --assemblyFilter=Tests \
+  --typeFilter=System. \
+  --outputDirectory=./__UnitTestWithAltCover \
+  --xmlReport=./coverage/UnitTestWithAltCover.xml
+
+  ./packages/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe \
+    "--noheader" "--labels=All" "--work=." \
+    "--result=./coverage/UnitTestWithAltCoverReport.xml" \
+    "./__UnitTestWithAltCover/AltCover.Tests.dll"
+
+
+C:\projects\altcover\_Binaries\AltCover\Debug+AnyCPU\AltCover.exe  Runner 
+-x C:\projects\altcover\packages\NUnit.ConsoleRunner.3.8.0\tools\nunit3-console.exe 
+-r C:\projects\altcover\_Binaries\AltCover.Tests\Debug+AnyCPU\__UnitTestWithAltCoverRunner 
+-w . 
+--  
+--labels=All --noheader --work=. --result=./_Reports/UnitTestWithAltCoverRunnerReport.xml "C:\projects\altcover\_Binaries\AltCover.Tests\Debug+AnyCPU\__UnitTestWithAltCoverRunner\AltCover.Tests.dll" "C:\projects\altcover\_Binaries\AltCover.Tests\Debug+AnyCPU\__UnitTestWithAltCoverRunner\Sample2.dll"
+
+    mono ${SCRIPT_CURRENT_DIR}/packages/altcover.3.5.569/tools/net45/AltCover.exe Runner                \
+        --executable ${SCRIPT_CURRENT_DIR}/packages/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe  \
+        --recorderDirectory ${SCRIPT_CURRENT_DIR}/__UnitTestWithAltCover/                               \
+        -w ${SCRIPT_CURRENT_DIR}                                                                        \
+        -- --noheader --labels=All  --work=${SCRIPT_CURRENT_DIR}                                        \
+        --result=${FSHARP_TEST_RUN_COVERAGE_REPORT}                                                         \
+        ${SCRIPT_CURRENT_DIR}/__UnitTestWithAltCover/BeFaster.App.Tests.dll || true
