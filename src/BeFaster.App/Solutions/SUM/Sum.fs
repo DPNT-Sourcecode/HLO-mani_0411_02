@@ -3,4 +3,4 @@
 open System
 
 module Sum =
-  let sum(x: int, y: int) = raise (NotImplementedException())
+  let sum(x: int, y: int) = x + y
